@@ -8,16 +8,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def  home():
-    year = year_options()
+    year = year_option()
     #print(states)
-    return render_template('home.html', year_options=year)
+    return render_template('home.html', year_option=year)
 
 @app.route("/showYear")
 def render_info():
-    year = year_options()
-    return render_template('index2.html', year_options=year)
-    
-def year_options():
+    year = year_option()
+    ayear = request.args["year"]
+    astronaut = Astronauts_in_year(year)
+    fact = "In the year " + ayear + ", there were " + astronaut + "astronauts"
+    return render_template('index2.html', year_option=year, AFact=fact )
+def year_option():
     with open('astronauts.json') as astronaut_data:
         years = json.load(astronaut_data)
     year=[]
@@ -28,7 +30,18 @@ def year_options():
     for s in year:
         options += Markup("<option value=\"" + str(s) + "\">" + str(s) + "</option>") #Use Markup so <, >, " are not escaped lt, gt, etc.
     return options
+def Astronauts_in_year(year):
+    with open('astronauts.json') as astronaut_data:
+        years = json.load(astronaut_data)
+    count=0
+    for c in count:
+        if c['Mission']['Year'] == ayear:
+            count = count+1
     
+    return count
+    
+    
+ 
 
 def is_localhost():
     """ Determines if app is running on localhost or not
@@ -40,5 +53,10 @@ def is_localhost():
 
 
 if __name__ == '__main__':
-    app.run(debug=False) # change to False when running in production
+    app.run(debug=True) # change to False when running in production
 
+#def Astronauts_in_year(ayear):
+  #  with open('astronauts.json') as astronaut_data:
+  #      years = json.load(astronaut_data)
+  #  amount = int(request.form['Year']
+  #  count = sum(1 for test in data if test['Profile']['Selection']['Year'] ==

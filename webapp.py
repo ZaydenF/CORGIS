@@ -6,7 +6,7 @@ import json
 
 app = Flask(__name__)
 
-@app.route("/")
+@app.route('/')
 def  home():
     year = year_option()
     #print(states)
@@ -15,10 +15,11 @@ def  home():
 @app.route("/showYear")
 def render_info():
     year = year_option()
-    ayear = request.args["year"]
-    astronaut = Astronauts_in_year(year)
-    fact = "In the year " + ayear + ", there were " + astronaut + "astronauts"
+    ayear = request.args.get('ayear')
+    astronaut_count = Astronauts_in_year(ayear)
+    fact = "In the year " + ayear + ", there were " + str(astronaut_count) + " astronauts"
     return render_template('index2.html', year_option=year, AFact=fact )
+
 def year_option():
     with open('astronauts.json') as astronaut_data:
         years = json.load(astronaut_data)
@@ -30,13 +31,14 @@ def year_option():
     for s in year:
         options += Markup("<option value=\"" + str(s) + "\">" + str(s) + "</option>") #Use Markup so <, >, " are not escaped lt, gt, etc.
     return options
-def Astronauts_in_year(year):
+
+def Astronauts_in_year(ayear):
     with open('astronauts.json') as astronaut_data:
         years = json.load(astronaut_data)
     count=0
-    for c in count:
+    for c in years:
         if c['Mission']['Year'] == ayear:
-            count = count+1
+            count += 1
     
     return count
     

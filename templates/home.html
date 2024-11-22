@@ -1,39 +1,15 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
- <link rel="stylesheet" href="static/mystyle.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-   <script src="static/myscript.js"></script>
-    
-    <title>Astronaut Data - About the Data</title>
-  </head>
-  <body>
-		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" href="/">About the Data</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/showYear">Number of astronauts by year</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="index3.html">Data by Nationality</a>
-            </li>
-			<li class="nav-item">
-              <a class="nav-link" href="index4.html"></a>
-            </li>
-          </ul>
-        </div>
-    </nav>
+{% extends "layout.html" %}
+  
+{% set active_page = "home" %}
+
+{% block title %}Home{% endblock %}
+
+{% block heading %}Home{% endblock %}
+
+{% block body %}
 	    <p>The data used in this web app is from the CORGIS Dataset Project and can be found 
       <a href="https://corgis-edu.github.io/corgis/json/broadway/">here</a>. The data in this website is about Astronaut missons and information from 1959 to 2019, so you won't find anything before 1959 and after 2019. In the profile for the astronauts it shares the their personal information like their name, gender, birth year, nationality, if they were in the military, and the group that they worked with. Now for this data set everything is recorded yearly, so if you are trying to use this website to try to figure a certain month, day, or week, it won't be possible with this data set</p>
 		<p> The data also shares their misson information such as their lifetime misson count, misson duration, and eta duration.</p>
 	  	<p> Something that the data set doesn't tell is its measure of the time for the misson duration so I did some research on some of the misson it's self to see how they correlate and I saw that the data set measure time using the amount of hours that it took. For example, I used the Mercury Atlast misson to see how it lined up and on the data set it says that it took 5 hours but on the misson duration on the source it says 4 hours and 55 minutes and 23 seconds, so they just rounded up with some of the data. <a href="https://en.wikipedia.org/wiki/Mercury-Atlas_6">Example source</a></p>
   		<p> You can that they reuse the name of the some of the space crafts but change it with a number to indicate that this isn't the first of this type of space craft. </p>
-  </body>
-</html>
+{% endblock %}
